@@ -1,0 +1,21 @@
+{% extends "users/layout.html" %}
+
+{% block body%}
+
+{% if logout_message is not None %}
+<div style="color: green;">{{logout_message}}</div>
+{% endif %}
+
+
+<form action="{% url 'users:login' %}" method="POST" name="login">
+    {% csrf_token %}
+    <input type="text" name="username">
+    <input type="password" name="password">
+    <input type="submit" name="login">
+</form>
+
+{% if message %}
+<div style="color: red;">{{message}}</div>
+{% endif %}
+
+{% endblock%}

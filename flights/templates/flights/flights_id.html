@@ -1,0 +1,31 @@
+{% extends "flights/layout.html" %}
+
+{% block body %}
+{{flights}} 
+<ul class="ul">
+{{flights.id}}
+{{flights.origin.city}}
+{{flights.destination.city}}
+{{flights.duration}}
+</ul>
+<ul>
+    {% for pass in passenger %}
+        <h2>{{pass.first}} {{pass.name}}</h2>
+    {%empty%}
+    <H2> no passesngers</H2>
+    {%endfor%}
+</ul>
+<h2>add passesngers</h2>
+<form action="{% url 'flights_app:book' flights.id %} " method="post" >
+    {% csrf_token %}
+    <select name="passenger">
+        {% for psg in non_passengers %}
+       <option value="{{psg.id}}">{{psg}}</option>
+       {% empty %}
+        <option value="empty">empty passengers</option>
+        {% endfor %}
+    </select>
+    <input type="submit" name="fname">
+</form>
+<a href="{% url 'flights_app:index' %}">back to flights</a>
+{%endblock%}

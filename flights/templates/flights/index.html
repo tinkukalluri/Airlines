@@ -1,0 +1,14 @@
+{% extends "flights/layout.html"  %}
+
+{%block body%}
+
+{% for x in flights %}
+<h2 style="color:black;">
+    <a href="{% url 'flights_app:flight_id' x.id %}" style="color:pink;">{{x}}</a>
+</h2>
+{%empty%}
+<h2>nothing in the data base</h2>
+
+{%endfor%}
+
+{%endblock%}
